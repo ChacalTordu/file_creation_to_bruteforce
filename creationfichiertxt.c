@@ -8,33 +8,31 @@
 
 FILE *file_to_write;
 
+//WRITES ALL POSSIBLE COMBINATIONS OF A GIVEN STR
 void make_combinations(char * str, char * tmp, int len, int ind) {
   int i;
-   
-  if (ind >= len) {
-    //puts(tmp);
-    fprintf(file_to_write,"%s\n",tmp);
-    return;
+  if (ind >= len) {                     //detect the end of our string
+    //puts(tmp);                        //to debug
+    fprintf(file_to_write,"%s\n",tmp);  //we write in the file our answer
+    return;                             //we leave
   }
    
   for (i = 0; i < len; i++) {
-    if (str[i] > 0) {
-      char pt = str[i];
-      str[i] = -1;
-      tmp[ind] = pt;
-      make_combinations(str, tmp, len, ind+1);
-      str[i] = pt;
+    if (str[i] > 0) {                           // looking for the end of our string
+      char pt = str[i];                         //create a tab char to load the value str[i] - this char is use as tempo, and it moves afterwards after each incremenation
+      str[i] = -1;                              //we set the value of str[i] at -1 
+      tmp[ind] = pt;                            //we load the first value in our memory allocated with our char tempo
+      make_combinations(str, tmp, len, ind+1);  //we do it again with an incrementation of ind to check if this the end of our string, else we continue to load the value
+      str[i] = pt;                              //loading pt in str[i]
     }
   }
 }
- 
 void combinations(char * str) {
-  int len = strlen(str);
-  char * tmp = malloc(len + 1);
-   
-  tmp[len] = '\0';
-  make_combinations(str, tmp, len, 0);
-  free(tmp);
+  int len = strlen(str);                //load the lenght of the string
+  char * tmp = malloc(len + 1);         //allocate the memory for our string load in tmp
+  tmp[len] = '\0';                      //create an empty case at the end to detect the end of our string
+  make_combinations(str, tmp, len, 0);  //call the fonction to know all the combinations possible (we do not care on same charactere)
+  free(tmp);                            //release memory allocated
 }
 
 int main() {    
