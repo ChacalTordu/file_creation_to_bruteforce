@@ -87,23 +87,32 @@ int main() {
             //printf("%s\n", string_to_print);
             fprintf(file_to_write,"%s\n",string_to_print);
         }
+
         //WRITING COMBINAITIONS WITHOUT CONSIDERING DUPLICATE LETTERS. 
         //We keep the first charac and sweep all the possibility from it with our fonction combination.
-        //The behavior would be : abcdef - acdefg - adefgh - aefghi - ... -  zabcde.
+        //The behavior would be : 
+        //abcdef - acdefg - adefgh - aefghi - ... - avwxyz
+        //bcdefg - bdefgh - ...
+        //...
+        //... - zabcde.
+        //W/ this programm we'll sweep all the possibilites from the alphabet i guess
         char tmp_to_send[SIZE_PSSWD];
         for (int k = 0; k < 25; k++)
         {
-          int incr=k;
-          //printf("Value of incr : %d\n",incr);
-          for (int l= 0; l < 6; l++,incr++)
+          tmp_to_send[0]=alphabet[k];//Take the first value
+          for (int m = 0; m < 25; m++)//And then scan withe the rest of letters
           {
-            tmp_to_send[l]=alphabet[incr];
-            //printf("value of l : %d\n",l);
+            int incr=m+1;
+            printf("Value of incr : %d\n",incr);//To debug
+            for (int l= 1; l < 6; l++,incr++)
+            {
+              tmp_to_send[l]=alphabet[incr];
+              printf("value of l : %d\n",l);//To debug
+            }
+            tmp_to_send[6]='\0';
+            //combinations(tmp_to_send);
+            printf("combinaitions to send : %s\n\n",tmp_to_send);//To debug
           }
-          tmp_to_send[6]='\0';
-          combinations(tmp_to_send);
-          //printf("combinaitions to send : %s\n\n",tmp_to_send);
-          
         }
     }
     else
