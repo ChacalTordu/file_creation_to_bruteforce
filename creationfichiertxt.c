@@ -87,9 +87,24 @@ int main() {
             //printf("%s\n", string_to_print);
             fprintf(file_to_write,"%s\n",string_to_print);
         }
-
-        char str[] = "abcdef";
-        combinations(str);
+        //WRITING COMBINAITIONS WITHOUT CONSIDERING DUPLICATE LETTERS. 
+        //We keep the first charac and sweep all the possibility from it with our fonction combination.
+        //The behavior would be : abcdef - acdefg - adefgh - aefghi - ... -  zabcde.
+        char tmp_to_send[SIZE_PSSWD];
+        for (int k = 0; k < 25; k++)
+        {
+          int incr=k;
+          //printf("Value of incr : %d\n",incr);
+          for (int l= 0; l < 6; l++,incr++)
+          {
+            tmp_to_send[l]=alphabet[incr];
+            //printf("value of l : %d\n",l);
+          }
+          tmp_to_send[6]='\0';
+          combinations(tmp_to_send);
+          //printf("combinaitions to send : %s\n\n",tmp_to_send);
+          
+        }
     }
     else
         printf("ERROR : file not opened");
