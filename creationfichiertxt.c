@@ -103,15 +103,15 @@ int main() {
           for (int m = 0; m < 25; m++)//And then scan withe the rest of letters
           {
             int incr=m+1;
-            printf("Value of incr : %d\n",incr);//To debug
+            //printf("Value of incr : %d\n",incr);//To debug
             for (int l= 1; l < 6; l++,incr++)
             {
               tmp_to_send[l]=alphabet[incr];
-              printf("value of l : %d\n",l);//To debug
+              //printf("value of l : %d\n",l);//To debug
             }
             tmp_to_send[6]='\0';
-            //combinations(tmp_to_send);
-            printf("combinaitions to send : %s\n\n",tmp_to_send);//To debug
+            combinations(tmp_to_send);
+            //printf("combinaitions to send : %s\n\n",tmp_to_send);//To debug
           }
         }
     }
