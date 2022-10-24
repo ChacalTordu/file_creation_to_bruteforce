@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
+#include <string.h> //to use string
+#include <stdbool.h> //to get NULL
+#include <unistd.h> //for use pause() to debug
 #define SIZE_PSSWD 5
 #define POSSIBLE_CHARA 25
 #define NB_POSS SIZE_PSSWD^POSSIBLE_CHARA
@@ -95,23 +96,36 @@ int main() {
         //bcdefg - bdefgh - ...
         //...
         //... - zabcde.
-        //W/ this programm we'll sweep all the possibilites from the alphabet i guess
+        //W/ this programm we'll sweep all the possibilites from a letter to other with a range of 5
+        //We have to repeat it by storing the second value of the alphabet in the 2nd place of our tmp, and 3thd, then 4th, 5th and 6th
         char tmp_to_send[SIZE_PSSWD];
-        for (int k = 0; k < 25; k++)
+        int incr_to_scan_couple_letters=0;
+        for (int k = 0; k < 25; k++) //sweep the alphabet //we test on a alphabet size of 8
         {
-          tmp_to_send[0]=alphabet[k];//Take the first value
-          for (int m = 0; m < 25; m++)//And then scan withe the rest of letters
+          for (int first_letter = 0; first_letter < 5; first_letter++)
           {
-            int incr=m+1;
-            //printf("Value of incr : %d\n",incr);//To debug
-            for (int l= 1; l < 6; l++,incr++)
+            printf("Value of first letters : %d\n",first_letter);
+            for (int n = 0; n < 25; n++,incr_to_scan_couple_letters++)//scan all possibilities from a couple of letters
             {
-              tmp_to_send[l]=alphabet[incr];
-              //printf("value of l : %d\n",l);//To debug
+              tmp_to_send[first_letter]=alphabet[first_letter+incr_to_scan_couple_letters];
+              printf("Value of incr_to_scan_couple_letters : %d\n",incr_to_scan_couple_letters);
+              for (int m = 0; m < 25; m++)//And then scan with the rest of letters
+              {
+                int incr_for_alphabet=m+1;//Dodging repeatition
+                if (incr_for_alphabet == 21) //Dodging void alphabet
+                  n=26;
+                printf("Value of incr : %d\n",incr_for_alphabet);//To debug
+                for (int l= first_letter+1; l < 6; l++,incr_for_alphabet++)
+                {
+                  tmp_to_send[l]=alphabet[incr_for_alphabet];
+                  printf("value of l : %d\n",l);//To debug
+                }
+                tmp_to_send[6]='\0';
+                //combinations(tmp_to_send);
+                printf("combinations to send : %s\n\n",tmp_to_send);//To debug
+                sleep(1);//sleep for 1 seconds to debug
+              }
             }
-            tmp_to_send[6]='\0';
-            combinations(tmp_to_send);
-            //printf("combinaitions to send : %s\n\n",tmp_to_send);//To debug
           }
         }
     }
