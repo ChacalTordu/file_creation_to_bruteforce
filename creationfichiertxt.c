@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#define TAILLE_MDP 3
 
 // Fonction récursive qui génère toutes les combinaisons de chaînes de caractères de taille n
 void genererCombinaisons(char* combinaisonActuelle, int n, FILE* fichier) {
@@ -27,11 +28,11 @@ int main() {
     }
 
     // Allouez de la mémoire pour la chaîne de caractères de combinaison actuelle
-    char* combinaisonActuelle = malloc(7 * sizeof(char));
-    combinaisonActuelle[6] = '\0';
+    char* combinaisonActuelle = malloc(TAILLE_MDP+1 * sizeof(char));
+    combinaisonActuelle[TAILLE_MDP] = '\0';
 
     // Appelez la fonction récursive
-    genererCombinaisons(combinaisonActuelle, 6, fichier);
+    genererCombinaisons(combinaisonActuelle, TAILLE_MDP, fichier);
 
     // Libérez la mémoire et fermez le fichier
     free(combinaisonActuelle);
