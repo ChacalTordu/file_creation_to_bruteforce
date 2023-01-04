@@ -1,2 +1,2 @@
-gcc -o main creationfichiertxt.c
-./main 
+gcc -o execute creationfichiertxt.c
+./execute 
